@@ -17,7 +17,7 @@ def create(msg):
     # Tentando enviar a msg pro Kafka?
     try:
         # Create an instance of the Kafka producer
-        producer = KafkaProducer(bootstrap_servers='ip172-18-0-10-bh3ubm43uhdg00cidb80-9092.direct.labs.play-with-docker.com',
+        producer = KafkaProducer(bootstrap_servers='localhost:9092',
                                     value_serializer=lambda v: str(v).encode('utf-8'))
 
         # Call the producer.send method with a producer-record
