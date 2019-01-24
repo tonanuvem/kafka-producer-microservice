@@ -23,7 +23,7 @@ def create(msg):
         # Call the producer.send method with a producer-record
         producer.send('meu-topico',texto)
         return make_response(
-            "Mensagem criada: ".str(texto), 201
+            "Mensagem criada: "+str(texto), 201
         )
 
     # Otherwise, they exist, that's an error
