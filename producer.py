@@ -30,6 +30,6 @@ def create(msg):
     except Exception as e:
         abort(
             406,
-            "Erro ao enviara msg pro Kafka: "+str(e),
+            "Erro ao enviara msg pro Kafka: "+e.message,
         )
 
