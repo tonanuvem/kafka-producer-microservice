@@ -1,4 +1,5 @@
 from kafka import KafkaProducer
+from kafka.errors import KafkaError
 from flask import make_response, abort
 from datetime import datetime
 
@@ -17,11 +18,26 @@ def create(msg):
     # Tentando enviar a msg pro Kafka?
     try:
         # Create an instance of the Kafka producer
-        producer = KafkaProducer(bootstrap_servers='localhost:9092',
-                                    value_serializer=lambda v: str(v).encode('utf-8'))
+        producer = KafkaProducer(bootstrap_servers='localhost:9092')
 
+        # Asynchronous by default
+        future = producer.send('meu-topico', texto)
+
+        # Block for 'synchronous' sends
+        try:
+            record_metadata = future.get(timeout=10)
+        except KafkaError as e:
+            # Decide what to do if produce request failed...
+            log.exception()
+            abort(
+                406,
+                "Erro ao enviara msg pro Kafka: "+repr(e),
+            )
+            #pass
+        
         # Call the producer.send method with a producer-record
-        producer.send('meu-topico',texto)
+        # producer.send('meu-topico',texto)
+        
         return make_response(
             "Mensagem criada: "+str(texto), 201
         )
