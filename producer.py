@@ -22,7 +22,8 @@ def create(msg):
         producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
 
         # Asynchronous by default
-        future = producer.send('meu-topico', texto)
+        future = producer.send('meu-topico', b'raw_bytes')
+        #future = producer.send('meu-topico', texto)
 
         # Block for 'synchronous' sends
         try:
@@ -32,7 +33,7 @@ def create(msg):
             log.exception()
             abort(
                 406,
-                "Erro ao enviara msg pro Kafka: "+repr(e),
+                "Erro 1 ao enviara msg pro Kafka: "+str(e),
             )
             #pass
         
@@ -47,6 +48,6 @@ def create(msg):
     except Exception as e:
         abort(
             406,
-            "Erro ao enviara msg pro Kafka: "+repr(e),
+            "Erro 2 ao enviara msg pro Kafka: "+str(e),
         )
 
