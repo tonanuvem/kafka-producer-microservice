@@ -18,7 +18,8 @@ def create(msg):
     # Tentando enviar a msg pro Kafka?
     try:
         # Create an instance of the Kafka producer
-        producer = KafkaProducer(bootstrap_servers='localhost:9092')
+        #producer = KafkaProducer(bootstrap_servers=['broker1:1234'])
+        producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
 
         # Asynchronous by default
         future = producer.send('meu-topico', texto)
