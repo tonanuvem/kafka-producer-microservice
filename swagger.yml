@@ -32,4 +32,4 @@ paths:
                 description: Texto da mensagem to create
       responses:
         201:
-          description: Successfully created person in list
+          description: Successfully created message
