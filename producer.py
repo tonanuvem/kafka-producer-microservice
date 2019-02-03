@@ -32,14 +32,15 @@ def create(msg):
 
     # Successful result returns assigned partition and offset
     print ('Sucesso no envio. Topico: '+str(record_metadata.topic)+' Particao :' + str(record_metadata.partition) + ' Offset: ' + str(record_metadata.offset))
+    postMSG_criada_para_o_slack(texto)
     return make_response(
         "Mensagem criada: "+str(texto), 201
     )
     
 def postMSG_criada_para_o_slack(msg):
     # format payload for slack
-    var sdata = formatForSlack(msg)
-    var url = 'https://hooks.slack.com/services/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'
+    sdata = formatForSlack(msg)
+    url = 'https://hooks.slack.com/services/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'
     r = requests.post(url, sdata)
     if r.status_code == 200:
       print('SUCCEDED: Sent slack webhook')
