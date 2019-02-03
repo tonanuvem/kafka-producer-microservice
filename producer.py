@@ -86,7 +86,8 @@ def create(msg):
         producer.send(topico, b'msg')
 '''
     # produce asynchronously with callbacks
-    producer.send(topico, texto.encode('utf-8').add_callback(on_send_success).add_errback(on_send_error)
+    bytestr = texto.encode('utf-8')
+    producer.send(topico, bytestr).add_callback(on_send_success).add_errback(on_send_error)
     
     # block until all async messages are sent
     producer.flush()
