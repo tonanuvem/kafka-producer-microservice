@@ -26,7 +26,6 @@ def create(msg):
         
     except Exception as e:
         # Decide what to do if produce request failed...
-        log.exception()
         abort(
             406,
             "Erro ao enviara msg pro Kafka: "+str(e),
