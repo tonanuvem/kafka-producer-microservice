@@ -55,7 +55,7 @@ def create(msg):
 
     # Asynchronous by default
     future = producer.send(topico, b'msg_raw_bytes')
-    future = producer.send(topico, texto)
+    future = producer.send(topico, str.encode(texto))
 
     # Block for 'synchronous' sends
     try:
