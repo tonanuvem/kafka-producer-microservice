@@ -12,43 +12,6 @@ def create(msg):
     topico = "meu-topico"
     broker = "192.168.10.133:9092"
     
-    """
-    # Tentando enviar a msg pro Kafka?
-    try:
-        # Create an instance of the Kafka producer
-        #producer = KafkaProducer(bootstrap_servers=['broker1:1234'])
-        producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
-
-        # Asynchronous by default
-        future = producer.send('meu-topico', b'raw_bytes')
-        #future = producer.send('meu-topico', texto)
-
-        # Block for 'synchronous' sends
-        try:
-            record_metadata = future.get(timeout=10)
-        except KafkaError as e:
-            # Decide what to do if produce request failed...
-            log.exception()
-            abort(
-                406,
-                "Erro 1 ao enviara msg pro Kafka: "+str(e),
-            )
-            #pass
-        
-        # Call the producer.send method with a producer-record
-        # producer.send('meu-topico',texto)
-        
-        return make_response(
-            "Mensagem criada: "+str(texto), 201
-        )
-
-    # Otherwise, they exist, that's an error
-    except Exception as e:
-        abort(
-            406,
-            "Erro 2 ao enviara msg pro Kafka: "+str(e),
-        )
-        """
     # --------
     # USAGE: https://kafka-python.readthedocs.io/en/master/usage.html
     producer = KafkaProducer(bootstrap_servers=[broker])
@@ -69,7 +32,7 @@ def create(msg):
         )
 
     # Successful result returns assigned partition and offset
-    print ('Sucesso no envio. Topico: '+record_metadata.topic+' Particao :' + record_metadata.partition+ ' Offset: '+record_metadata.offset)
+    print ('Sucesso no envio. Topico: '+str(record_metadata.topic)+' Particao :' + str(record_metadata.partition) + ' Offset: ' + str(record_metadata.offset))
     return make_response(
         "Mensagem criada: "+str(texto), 201
     )
