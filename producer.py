@@ -86,7 +86,7 @@ def create(msg):
         producer.send(topico, b'msg')
 '''
     # produce asynchronously with callbacks
-    producer.send(topico, b'texto').add_callback(on_send_success).add_errback(on_send_error)
+    producer.send(topico, texto.encode('utf-8').add_callback(on_send_success).add_errback(on_send_error)
     
     # block until all async messages are sent
     producer.flush()
@@ -98,15 +98,10 @@ def on_send_success(record_metadata):
     print(record_metadata.topic)
     print(record_metadata.partition)
     print(record_metadata.offset)
-    return make_response(
-        "Mensagem criada: "+str(texto), 201
-    )
+
 
 def on_send_error(excp):
     print('I am an errback: '+str(excp))
     log.error('I am an errback', exc_info=excp)
     # handle exception
-    abort(
-        406,
-        "Erro 2 ao enviara msg pro Kafka: "+str(excp),
-    )
+
