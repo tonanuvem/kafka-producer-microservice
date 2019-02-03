@@ -44,7 +44,6 @@ def postMSG_criada_para_o_slack(msg):
     r = requests.post(url, sdata)
     if r.status_code == 200:
       print('SUCCEDED: Sent slack webhook')
-    })
     else:
       print('FAILED: Send slack webhook')
 
@@ -55,5 +54,4 @@ def formatForSlack(msg)
     "text": msg,
     "icon_emoji":':mailbox_with_mail:'
   }
-  // return json string of payload
   return payload
