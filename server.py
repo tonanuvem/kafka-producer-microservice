@@ -15,7 +15,7 @@ def home():
     localhost:5000/
     :return:        the rendered template 'home.html'
     """
-    return render_template('home.html')
+    return '<a href="api/ui/">Bem vindos. Acessar Swagger UI</a>'
 
 # If we're running in stand alone mode, run the application
 if __name__ == '__main__':
