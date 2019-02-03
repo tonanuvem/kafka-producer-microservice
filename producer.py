@@ -54,7 +54,8 @@ def create(msg):
     producer = KafkaProducer(bootstrap_servers=[broker])
 
     # Asynchronous by default
-    future = producer.send(topico, b'raw_bytes')
+    future = producer.send(topico, b'msg_raw_bytes')
+    future = producer.send(topico, texto)
 
     # Block for 'synchronous' sends
     try:
