@@ -29,7 +29,7 @@ def create(msg):
         print(repr(e))
         abort(
             406,
-            "Erro ao enviara msg pro Kafka: "+str(e),
+            "Erro ao enviara msg pro Kafka: "+repr(e),
         )
 
     # Successful result returns assigned partition and offset
