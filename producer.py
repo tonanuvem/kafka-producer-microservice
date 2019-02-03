@@ -55,7 +55,7 @@ def create(msg):
 
     # Asynchronous by default
     future = producer.send(topico, b'msg2_raw_bytes')
-    future = producer.send(topico, str.encode(texto))
+    #future = producer.send(topico, str.encode(texto))
 
     # Block for 'synchronous' sends
     try:
@@ -69,14 +69,14 @@ def create(msg):
     print (record_metadata.topic)
     print (record_metadata.partition)
     print (record_metadata.offset)
-    '''
+    
     # produce keyed messages to enable hashed partitioning
     producer.send(topico, key=b'foo', value=b'bar')
 
     # encode objects via msgpack
     #producer = KafkaProducer(value_serializer=msgpack.dumps)
     producer.send(topico, {'key': 'value'})
-
+    '''
     # produce json messages
     producer = KafkaProducer(value_serializer=lambda m: json.dumps(m).encode('ascii'))
     producer.send(topico, {'key': 'value'})
@@ -100,6 +100,7 @@ def on_send_success(record_metadata):
     print(record_metadata.offset)
 
 def on_send_error(excp):
+    print('I am an errback: '+str(excp))
     log.error('I am an errback', exc_info=excp)
     # handle exception
     pass
