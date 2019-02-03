@@ -9,28 +9,27 @@ def get_timestamp():
     return datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))
 
 def create(msg):
-   
-    texto = msg.get("texto", None)
-    topico = os.environ['TOPICO']
-    broker = os.environ['HOST'] + ":" + os.environ['PORTA'] #"192.168.10.133:9092"
-    print(broker)
-    
-    # --------
-    # USAGE: https://kafka-python.readthedocs.io/en/master/usage.html
-    producer = KafkaProducer(bootstrap_servers=[broker])
-
-    # Asynchronous by default
-    future = producer.send(topico, texto.encode('utf-8'))
-
-    # Block for 'synchronous' sends
     try:
+        texto = msg.get("texto", None)
+        topico = os.environ['TOPICO']
+        broker = os.environ['HOST'] + ":" + os.environ['PORTA'] #"192.168.10.133:9092"
+        print(broker)
+
+        # --------
+        # USAGE: https://kafka-python.readthedocs.io/en/master/usage.html
+        producer = KafkaProducer(bootstrap_servers=[broker])
+
+        # Asynchronous by default
+        future = producer.send(topico, texto.encode('utf-8'))
+        # Block for 'synchronous' sends
         record_metadata = future.get(timeout=10)
-    except KafkaError:
+        
+    except Except as e:
         # Decide what to do if produce request failed...
         log.exception()
         abort(
             406,
-            "Erro 1 ao enviara msg pro Kafka: "+str(e),
+            "Erro ao enviara msg pro Kafka: "+str(e),
         )
 
     # Successful result returns assigned partition and offset
