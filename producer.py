@@ -75,7 +75,7 @@ def create(msg):
 
     # encode objects via msgpack
     #producer = KafkaProducer(value_serializer=msgpack.dumps)
-    producer.send(topico, {'key': 'value'})
+    #producer.send(topico, {'key': 'value'})
     '''
     # produce json messages
     producer = KafkaProducer(value_serializer=lambda m: json.dumps(m).encode('ascii'))
