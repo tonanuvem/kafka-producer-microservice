@@ -54,7 +54,7 @@ def create(msg):
     producer = KafkaProducer(bootstrap_servers=[broker])
 
     # Asynchronous by default
-    future = producer.send(topico, b'msg22:53_raw_bytes')
+    future = producer.send(topico, texto.encode('utf-8'))
     #future = producer.send(topico, str.encode(texto))
 
     # Block for 'synchronous' sends
@@ -63,20 +63,25 @@ def create(msg):
     except KafkaError:
         # Decide what to do if produce request failed...
         log.exception()
-        pass
+        abort(
+            406,
+            "Erro 1 ao enviara msg pro Kafka: "+str(e),
+        )
 
     # Successful result returns assigned partition and offset
-    print (record_metadata.topic)
-    print (record_metadata.partition)
-    print (record_metadata.offset)
+    print ('Sucesso no envio. Topico: '+record_metadata.topic+' Particao :' + record_metadata.partition+ ' Offset: '+record_metadata.offset)
+    return make_response(
+        "Mensagem criada: "+str(texto), 201
+    )
     
+    '''
     # produce keyed messages to enable hashed partitioning
     producer.send(topico, key=b'foo', value=b'bar')
 
     # encode objects via msgpack
     #producer = KafkaProducer(value_serializer=msgpack.dumps)
     #producer.send(topico, {'key': 'value'})
-    '''
+    
     # produce json messages
     producer = KafkaProducer(value_serializer=lambda m: json.dumps(m).encode('ascii'))
     producer.send(topico, {'key': 'value'})
@@ -84,7 +89,7 @@ def create(msg):
     # produce asynchronously
     for _ in range(100):
         producer.send(topico, b'msg')
-'''
+
     # produce asynchronously with callbacks
     bytestr = texto.encode('utf-8')
     producer.send(topico, bytestr).add_callback(on_send_success).add_errback(on_send_error)
@@ -105,4 +110,4 @@ def on_send_error(excp):
     print('I am an errback: '+str(excp))
     log.error('I am an errback', exc_info=excp)
     # handle exception
-
+'''
