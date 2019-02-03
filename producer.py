@@ -2,6 +2,7 @@ from kafka import KafkaProducer
 from kafka.errors import KafkaError
 from flask import make_response, abort
 from datetime import datetime
+import requests
 
 def get_timestamp():
     return datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))
@@ -47,7 +48,7 @@ def postMSG_criada_para_o_slack(msg):
     else:
       print('FAILED: Send slack webhook')
 
-def formatForSlack(msg)
+def formatForSlack(msg):
   payload = {
     "channel":'#sync',
     "username":'app_kafka_producer',
