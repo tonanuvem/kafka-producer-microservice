@@ -18,7 +18,6 @@ def create(msg):
 
     # Asynchronous by default
     future = producer.send(topico, texto.encode('utf-8'))
-    #future = producer.send(topico, str.encode(texto))
 
     # Block for 'synchronous' sends
     try:
@@ -37,40 +36,23 @@ def create(msg):
         "Mensagem criada: "+str(texto), 201
     )
     
-    '''
-    # produce keyed messages to enable hashed partitioning
-    producer.send(topico, key=b'foo', value=b'bar')
+def postMSG_criada_para_o_slack(msg):
+    # format payload for slack
+    var sdata = formatForSlack(msg)
+    var url = 'https://hooks.slack.com/services/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'
+    r = requests.post(url, sdata)
+    if r.status_code == 200:
+      print('SUCCEDED: Sent slack webhook')
+    })
+    else:
+      print('FAILED: Send slack webhook')
 
-    # encode objects via msgpack
-    #producer = KafkaProducer(value_serializer=msgpack.dumps)
-    #producer.send(topico, {'key': 'value'})
-    
-    # produce json messages
-    producer = KafkaProducer(value_serializer=lambda m: json.dumps(m).encode('ascii'))
-    producer.send(topico, {'key': 'value'})
-
-    # produce asynchronously
-    for _ in range(100):
-        producer.send(topico, b'msg')
-
-    # produce asynchronously with callbacks
-    bytestr = texto.encode('utf-8')
-    producer.send(topico, bytestr).add_callback(on_send_success).add_errback(on_send_error)
-    
-    # block until all async messages are sent
-    producer.flush()
-
-    # configure multiple retries
-    producer = KafkaProducer(retries=5)
-
-def on_send_success(record_metadata):
-    print(record_metadata.topic)
-    print(record_metadata.partition)
-    print(record_metadata.offset)
-
-
-def on_send_error(excp):
-    print('I am an errback: '+str(excp))
-    log.error('I am an errback', exc_info=excp)
-    # handle exception
-'''
+def formatForSlack(msg)
+  payload = {
+    "channel":'#sync',
+    "username":'app_kafka_producer',
+    "text": msg,
+    "icon_emoji":':mailbox_with_mail:'
+  }
+  // return json string of payload
+  return payload
