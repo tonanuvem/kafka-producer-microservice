@@ -24,7 +24,7 @@ def create(msg):
         # Block for 'synchronous' sends
         record_metadata = future.get(timeout=10)
         
-    except Except as e:
+    except Exception as e:
         # Decide what to do if produce request failed...
         log.exception()
         abort(
