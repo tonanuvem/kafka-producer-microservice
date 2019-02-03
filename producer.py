@@ -68,7 +68,7 @@ def create(msg):
     print (record_metadata.topic)
     print (record_metadata.partition)
     print (record_metadata.offset)
-'''
+    '''
     # produce keyed messages to enable hashed partitioning
     producer.send(topico, key=b'foo', value=b'bar')
 
@@ -86,7 +86,7 @@ def create(msg):
 
     # produce asynchronously with callbacks
     producer.send(topico, b'raw_bytes').add_callback(on_send_success).add_errback(on_send_error)
-'''
+    '''
     # block until all async messages are sent
     producer.flush()
 
