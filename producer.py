@@ -3,6 +3,7 @@ from kafka.errors import KafkaError
 from flask import make_response, abort
 from datetime import datetime
 import requests
+import json
 
 def get_timestamp():
     return datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))
@@ -42,7 +43,7 @@ def postMSG_criada_para_o_slack(msg):
     # format payload for slack
     sdata = formatForSlack(msg)
     url = 'https://hooks.slack.com/services/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'
-    r = requests.post(url, sdata)
+    r = requests.post(url, sdata, headers={'Content-Type': 'application/json'})
     if r.status_code == 200:
       print('SUCCEDED: Sent slack webhook')
     else:
@@ -55,4 +56,4 @@ def formatForSlack(msg):
     "text": msg,
     "icon_emoji":':mailbox_with_mail:'
   }
-  return payload
+  return json.dumps(payload)
