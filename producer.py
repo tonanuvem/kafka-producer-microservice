@@ -3,7 +3,7 @@ from kafka.errors import KafkaError
 from flask import make_response, abort
 from datetime import datetime
 import requests
-import json
+import json, os
 
 def get_timestamp():
     return datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))
@@ -11,8 +11,9 @@ def get_timestamp():
 def create(msg):
    
     texto = msg.get("texto", None)
-    topico = "meu-topico"
-    broker = "192.168.10.133:9092"
+    topico = os.environ['TOPICO']
+    broker = os.environ['HOST'] + ":" + os.environ['PORTA'] #"192.168.10.133:9092"
+    print(broker)
     
     # --------
     # USAGE: https://kafka-python.readthedocs.io/en/master/usage.html
