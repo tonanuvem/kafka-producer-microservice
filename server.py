@@ -19,7 +19,7 @@ def home():
     return '<a href="api/ui/">Bem vindos. Acessar Swagger UI</a>'
 
 class Texto:
-  def __init__(self, msg):
+  def __init__(self, msg, n):
     self.texto = msg
   def get():
     return self.texto
