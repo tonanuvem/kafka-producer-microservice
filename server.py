@@ -18,7 +18,14 @@ def home():
     """
     return '<a href="api/ui/">Bem vindos. Acessar Swagger UI</a>'
 
+class Texto:
+  def __init__(self, msg):
+    self.texto = msg
+  def get():
+    return self.texto
+
 # If we're running in stand alone mode, run the application
 if __name__ == '__main__':
-    create("Iniciando Producer para o Kafka...")
+    
+    create(Texto("Iniciando Producer para o Kafka..."))
     app.run(host='0.0.0.0', port=5001, debug=True)
