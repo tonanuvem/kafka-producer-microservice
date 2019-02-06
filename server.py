@@ -18,6 +18,7 @@ def home():
     """
     return '<a href="api/ui/">Bem vindos. Acessar Swagger UI</a>'
 
+# Classe definida só para postar uma mensagem inicial, visando criar o tópico
 class Texto:
   def __init__(self, msg, n):
     self.texto = msg
@@ -27,5 +28,5 @@ class Texto:
 # If we're running in stand alone mode, run the application
 if __name__ == '__main__':
     
-    create(Texto("Iniciando Producer para o Kafka...",""))
+    print(create(Texto("Iniciando Producer para o Kafka...","")))
     app.run(host='0.0.0.0', port=5001, debug=True)
