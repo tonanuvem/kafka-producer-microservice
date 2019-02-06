@@ -21,7 +21,7 @@ def home():
 class Texto:
   def __init__(self, msg, n):
     self.texto = msg
-  def get():
+  def get(m, n):
     return self.texto
 
 # If we're running in stand alone mode, run the application
