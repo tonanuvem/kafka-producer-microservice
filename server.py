@@ -1,5 +1,6 @@
 from flask import render_template
 import connexion
+from producer import create
 
 # Create the application instance
 app = connexion.App(__name__, specification_dir='./')
@@ -19,4 +20,5 @@ def home():
 
 # If we're running in stand alone mode, run the application
 if __name__ == '__main__':
+    create("Iniciando Producer para o Kafka...")
     app.run(host='0.0.0.0', port=5001, debug=True)
