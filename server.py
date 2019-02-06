@@ -22,7 +22,7 @@ def home():
 # If we're running in stand alone mode, run the application
 if __name__ == '__main__':
     
-    with app.app_context():
+    with app.app.app_context():
         # Classe definida só para postar uma mensagem inicial, visando criar o tópico
         class Texto:
           def __init__(self, msg, n):
