@@ -13,13 +13,7 @@ CORS(app.app,resources=r'/api/*',methods=['POST', 'OPTIONS'])
 # Create a URL route in our application for "/"
 @app.route('/')
 def home():
-    """
-    This function just responds to the browser ULR
-    localhost:5000/
-    :return:        the rendered template 'home.html'
-    """
     return '<a href="api/ui/">Bem vindos. Acessar Swagger UI</a>'
-
 
 # If we're running in stand alone mode, run the application
 if __name__ == '__main__':
