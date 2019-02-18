@@ -1,6 +1,7 @@
 from flask import render_template
 import connexion
 from producer import create
+from flask_cors import CORS
 
 # Create the application instance
 app = connexion.App(__name__, specification_dir='./')
