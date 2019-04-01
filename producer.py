@@ -42,7 +42,7 @@ def create(msg):
 def postMSG_criada_para_o_slack(msg):
     # format payload for slack
     sdata = formatForSlack(msg)
-    url = 'https://hooks.slack.com/services/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'
+    url = os.environ['SLACK']
     r = requests.post(url, sdata, headers={'Content-Type': 'application/json'})
     if r.status_code == 200:
       print('SUCCEDED: Sent slack webhook')
