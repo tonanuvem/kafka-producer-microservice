@@ -50,8 +50,9 @@ def postMSG_criada_para_o_slack(msg):
       print('FAILED: Send slack webhook')
 
 def formatForSlack(msg):
+  canal = os.environ['CANAL']
   payload = {
-    "channel":'#sync',
+    "channel":canal,
     "username":'app_kafka_producer',
     "text": msg,
     "icon_emoji":':mailbox_with_mail:'
