@@ -4,9 +4,9 @@ ENV TOPICO=meu-topico
 ENV HOST=0.0.0.0
 ENV PORTA=9092
 ENV SLACK=
-#ENV SLACK=https://hooks.slack.com/services/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
+#exemplo: ENV SLACK=https://hooks.slack.com/services/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
 ENV CANAL=lab-produtor
-#ENV CANAL=lab-testes
+#exemplo: ENV CANAL=lab-testes
 
 ADD . /code
 WORKDIR /code
