@@ -3,8 +3,7 @@ FROM python:3.6-alpine
 ENV TOPICO=meu-topico
 ENV HOST=0.0.0.0
 ENV PORTA=9092
-ENV SLACK=
-#exemplo: ENV SLACK=https://hooks.slack.com/services/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
+ENV SLACK=inserir-webhook
 ENV CANAL=lab-produtor
 #exemplo: ENV CANAL=lab-testes
 
