@@ -5,7 +5,7 @@ ENV HOST=0.0.0.0
 ENV PORTA=9092
 ENV SLACK=inserir-webhook
 ENV CANAL=lab-produtor
-#exemplo: ENV CANAL=lab-testes
+#ENV CANAL=lab-testes
 
 ADD . /code
 WORKDIR /code
