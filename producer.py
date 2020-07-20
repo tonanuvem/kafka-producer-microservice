@@ -46,9 +46,9 @@ def postMSG_criada(msg):
     url = os.environ['WEBHOOK']
     r = requests.post(url, sdata, headers={'Content-Type': 'application/json'})
     if r.status_code == 200:
-      print('SUCCEDED: Sent slack webhook')
+      print('SUCCEDED: Sent webhook')
     else:
-      print('FAILED: Send slack webhook')
+      print('FAILED: Send webhook')
 
 def formatMSG(msg):
   canal = os.environ['CANAL']
