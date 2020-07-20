@@ -34,22 +34,23 @@ def create(msg):
 
     # Successful result returns assigned partition and offset
     print ('Sucesso no envio. Topico: '+str(record_metadata.topic)+' Particao :' + str(record_metadata.partition) + ' Offset: ' + str(record_metadata.offset))
-    postMSG_criada_para_o_slack(texto)
+    postMSG_criada(texto)
     return make_response(
         "Mensagem criada: "+str(texto), 201
     )
     
-def postMSG_criada_para_o_slack(msg):
+def postMSG_criada(msg):
     # format payload for slack
-    sdata = formatForSlack(msg)
-    url = os.environ['SLACK']
+    # para o Microsoft Teams, usa somente o campo Text (https://docs.microsoft.com/pt-br/outlook/actionable-messages/message-card-reference#card-examples)
+    sdata = formatMSG(msg)
+    url = os.environ['WEBHOOK']
     r = requests.post(url, sdata, headers={'Content-Type': 'application/json'})
     if r.status_code == 200:
       print('SUCCEDED: Sent slack webhook')
     else:
       print('FAILED: Send slack webhook')
 
-def formatForSlack(msg):
+def formatMSG(msg):
   canal = os.environ['CANAL']
   payload = {
     "channel":canal,
