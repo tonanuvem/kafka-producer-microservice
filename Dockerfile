@@ -1,9 +1,11 @@
 FROM python:3.6-alpine
 
+ARG WEBHOOK_ARG=inserir
+
 ENV TOPICO=meu-topico
 ENV HOST=0.0.0.0
 ENV PORTA=9092
-ENV WEBHOOK=inserir-webhook
+ENV WEBHOOK=$WEBHOOK_ARG
 ENV CANAL=lab-produtor
 #ENV CANAL=lab-testes
 
