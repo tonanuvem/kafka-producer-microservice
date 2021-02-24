@@ -3,3 +3,6 @@ read WEBHOOK
 
 sed -i 's|inserir_webhook|'$WEBHOOK'|' Dockerfile
 # sed -i 's|lab-produtor|lab-testes|' Dockerfile
+
+
+export WEBHOOK_ARG=$WEBHOOK
