@@ -1,6 +1,6 @@
 FROM python:3.6-alpine
 
-ARG WEBHOOK_ARG=inserir
+ARG WEBHOOK_ARG=inserir_webhook
 
 ENV TOPICO=meu-topico
 ENV HOST=0.0.0.0
