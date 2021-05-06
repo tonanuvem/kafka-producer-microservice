@@ -4,7 +4,7 @@ Click==7.0
 clickclick==1.2.2
 connexion==2.2.0
 Flask==1.0.2
-Flask-Cors==3.0.7
+Flask-Cors==3.0.9
 idna==2.8
 inflection==0.3.1
 itsdangerous==1.1.0
