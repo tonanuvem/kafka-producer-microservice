@@ -13,7 +13,7 @@ jsonschema==2.6.0
 kafka-python==1.4.4
 MarkupSafe==1.1.0
 openapi-spec-validator==0.2.4
-PyYAML==4.2b1
+PyYAML==5.4
 requests==2.21.0
 six==1.12.0
 swagger-ui-bundle==0.0.3
