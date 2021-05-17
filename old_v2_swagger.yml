@@ -1,0 +1,35 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that goes with our server code
+  version: "1.0.0"
+  title: Swagger ReST Kafka
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+  /kafka:
+    post:
+      operationId: producer.create
+      tags:
+        - Kafka
+      summary: Create a message
+      description: Create a new message on Kafka topic
+      parameters:
+        - name: msg
+          in: body
+          description: Message to create
+          required: True
+          schema:
+            type: object
+            properties:
+              texto:
+                type: string
+                description: Texto da mensagem to create
+      responses:
+        201:
+          description: Successfully created message
