@@ -2,7 +2,7 @@
 set -e
 
 # Verifica se já foi configurado
-if grep -q "inserir_webhook" Dockerfile 2>/dev/null then
+if grep -q "inserir_webhook" Dockerfile 2>/dev/null; then
     echo "Digite a URL que está no canal #webhook:"
     read WEBHOOK
 
