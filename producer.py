@@ -77,7 +77,8 @@ def formatMSG(msg):
       "sections": [{
         "activityTitle": msg,
         "activitySubtitle": "Solicitado via Kafka Producer",
-        "activityImage": "https://cdn4.iconfinder.com/data/icons/pop-scenes/1000/workspace___work_from_home_laptop_computer_drink_beverage-1024.png"
+        "activityImage": "https://cdn-icons-png.magnific.com/512/2648/2648618.png"
+        #"activityImage": "https://cdn4.iconfinder.com/data/icons/pop-scenes/1000/workspace___work_from_home_laptop_computer_drink_beverage-1024.png"
       }]
     }
   return json.dumps(payload)
