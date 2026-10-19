@@ -1,9 +1,12 @@
 #!/bin/sh
 set -e
 
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+DOCKERFILE="$SCRIPT_DIR/Dockerfile"
+
 # Verifica se já foi configurado
-if grep -q "inserir_webhook" Dockerfile 2>/dev/null; then
-    echo "Digite a URL que está no canal #webhook:"
+if grep -q "inserir_webhook" "$DOCKERFILE" 2>/dev/null; then
+    printf "Digite a URL do webhook (Teams ou Slack): "
     read WEBHOOK
 
     if [ -z "$WEBHOOK" ]; then
@@ -11,17 +14,11 @@ if grep -q "inserir_webhook" Dockerfile 2>/dev/null; then
         exit 1
     fi
 
-    WEBHOOK_ESC=$(printf '%s' "$WEBHOOK" | sed 's/[&/\]/\\&/g')
-    sed -i "s|inserir_webhook|$WEBHOOK_ESC|g" ./producer/Dockerfile
-    sed -i "s|inserir_webhook|$WEBHOOK_ESC|g" ./docker-compose.yml
-    echo "Webhook configurado com sucesso."
+    WEBHOOK_ESC=$(printf '%s' "$WEBHOOK" | sed 's/[&|\\]/\\&/g')
+    sed -i "s|inserir_webhook|$WEBHOOK_ESC|g" "$DOCKERFILE"
+    echo "Webhook configurado com sucesso em $DOCKERFILE."
+    echo "Reconstrua a imagem com: docker build -t producer:latest \"$SCRIPT_DIR\""
 else
     echo "AVISO: Webhook já foi configurado anteriormente."
-    echo "Para reconfigurar, execute: git checkout Dockerfile"
+    echo "Para reconfigurar, execute: git -C \"$SCRIPT_DIR\" checkout Dockerfile"
 fi
-
-#echo "Digite a URL que está no canal #webhook do SLACK:"
-#read WEBHOOK
-
-#sed -i 's|inserir_webhook|'$WEBHOOK'|' Dockerfile
-# sed -i 's|lab-produtor|lab-testes|' Dockerfile
